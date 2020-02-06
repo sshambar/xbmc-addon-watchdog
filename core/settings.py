@@ -21,7 +21,7 @@ import xbmcaddon
 from . import utils
 
 ADDON = xbmcaddon.Addon()
-ADDON_ID = ADDON.getAddonInfo('id').decode('utf-8')
+ADDON_ID = ADDON.getAddonInfo('id')
 REMOVAL_ENABLED = ADDON.getSetting('clean') == 'true'
 POLLING = int(ADDON.getSetting('method'))
 POLLING_INTERVAL = int("0"+ADDON.getSetting('pollinginterval')) or 4
