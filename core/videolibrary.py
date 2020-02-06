@@ -15,13 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import unicode_literals
+
 
 import os
 import xbmc
 import json
 import time
-from utils import is_url, rpc, log
+from .utils import is_url, rpc, log
 
 
 def _split_path(path):

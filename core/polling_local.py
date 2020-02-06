@@ -15,13 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import unicode_literals
+
 
 import os
-import settings
+from . import settings
 from functools import partial
-from polling import Poller, PollerNonRecursive, file_list_from_walk, hidden
-from utils import encode_path, decode_path, raise_if_aborted
+from .polling import Poller, PollerNonRecursive, file_list_from_walk, hidden
+from .utils import encode_path, decode_path, raise_if_aborted
 
 
 def _walk(path):

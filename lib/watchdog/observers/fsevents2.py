@@ -45,7 +45,7 @@ from watchdog.observers.api import (
 
 # pyobjc
 import AppKit
-from FSEvents import (
+from .FSEvents import (
     FSEventStreamCreate,
     CFRunLoopGetCurrent,
     FSEventStreamScheduleWithRunLoop,
@@ -57,7 +57,7 @@ from FSEvents import (
     FSEventStreamRelease,
 )
 
-from FSEvents import (
+from .FSEvents import (
     kCFAllocatorDefault,
     kCFRunLoopDefaultMode,
     kFSEventStreamEventIdSinceNow,
