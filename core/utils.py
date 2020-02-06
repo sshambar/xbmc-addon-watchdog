@@ -29,7 +29,7 @@ from threading import Condition
 
 def log(msg, level=xbmc.LOGDEBUG):
     from . import settings
-    xbmc.log(("[" + settings.ADDON_ID + "] " + msg).encode('utf-8', 'replace'), level)
+    xbmc.log(("[" + settings.ADDON_ID + "] " + msg).encode('utf-8', 'replace').decode(), level)
 
 
 def encode_path(path):
@@ -56,9 +56,9 @@ def escape_param(s):
 
 
 def rpc(method, **params):
-    params = json.dumps(params, encoding='utf-8')
-    query = b'{"jsonrpc": "2.0", "method": "%s", "params": %s, "id": 1}' % (method, params)
-    return json.loads(xbmc.executeJSONRPC(query), encoding='utf-8')
+    params = json.dumps(params)
+    query = b'{"jsonrpc": "2.0", "method": "%s", "params": %s, "id": 1}' % (method.encode(), params.encode())
+    return json.loads(xbmc.executeJSONRPC(query.decode()), encoding='utf-8')
 
 
 def _split_multipaths(paths):

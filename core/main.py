@@ -116,7 +116,7 @@ class EventHandler(FileSystemEventHandler):
         self.library = library
         self.path = path
         self.xbmcif = xbmcif
-        self.supported_media = '|' + xbmc.getSupportedMedia(library).decode('utf-8') + '|'
+        self.supported_media = '|' + xbmc.getSupportedMedia(library) + '|'
 
     def on_created(self, event):
         if not event.is_directory and not self._can_skip(event, event.src_path):
@@ -187,11 +187,11 @@ def main():
 
     sources = []
     video_sources = settings.VIDEO_SOURCES
-    sources.extend(list(zip(itertools.repeat('video'), video_sources)))
+    sources.extend(list(zip(repeat('video'), video_sources)))
     log("video sources %s" % video_sources)
 
     music_sources = settings.MUSIC_SOURCES
-    sources.extend(list(zip(itertools.repeat('music'), music_sources)))
+    sources.extend(list(zip(repeat('music'), music_sources)))
     log("music sources %s" % music_sources)
 
     xbmcif = XBMCIF()
@@ -212,7 +212,7 @@ def main():
 
     for i, (libtype, path) in enumerate(sources):
         if progress:
-            progress.update((i+1)/len(sources)*100, message="Setting up %s" % path)
+            progress.update(int((i+1)/len(sources)*100), message="Setting up %s" % path)
         try:
             emitter_cls = emitters.select_emitter(path)
         except IOError:
