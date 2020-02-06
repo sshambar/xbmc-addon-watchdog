@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import unicode_literals
+
 
 import os
 import re
@@ -23,12 +23,12 @@ import sys
 import xbmc
 import xbmcgui
 import json
-from urllib import unquote
+from urllib.parse import unquote
 from threading import Condition
 
 
 def log(msg, level=xbmc.LOGDEBUG):
-    import settings
+    from . import settings
     xbmc.log(("[" + settings.ADDON_ID + "] " + msg).encode('utf-8', 'replace'), level)
 
 

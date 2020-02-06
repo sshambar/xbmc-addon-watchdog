@@ -15,14 +15,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import unicode_literals
+
 
 import os
 from watchdog.observers.api import BaseObserver
 from watchdog.observers.api import ObservedWatch
-from polling_local import LocalPoller
-from polling_xbmc import VFSPoller
-from utils import encode_path, is_url
+from .polling_local import LocalPoller
+from .polling_xbmc import VFSPoller
+from .utils import encode_path, is_url
 
 
 try:
@@ -59,8 +59,8 @@ class MultiEmitterObserver(BaseObserver):
 
 def select_emitter(path):
     import xbmcvfs
-    import settings
-    from utils import log
+    from . import settings
+    from .utils import log
 
     if is_url(path) and xbmcvfs.exists(path):
         return VFSPoller
@@ -77,7 +77,7 @@ def select_emitter(path):
 
 
 def _is_remote_filesystem(path):
-    from utils import log
+    from .utils import log
     from watchdog.utils import platform
     if not platform.is_linux():
         return False
