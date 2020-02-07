@@ -1,3 +1,6 @@
+v1.0.0
+- Remove script.module.pathtools and script.module.watchdog so they are correctly referenced upstream 
+
 v0.9.8
 - convert addon to work on py3
 
