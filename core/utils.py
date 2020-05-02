@@ -123,5 +123,5 @@ class XBMCInterrupt(Exception):
 
 
 def raise_if_aborted():
-    if xbmc.abortRequested:
+    if xbmc.Monitor().abortRequested():
         raise XBMCInterrupt

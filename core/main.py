@@ -180,7 +180,7 @@ def main():
         start = time.time()
         while time.time() - start < settings.STARTUP_DELAY:
             xbmc.sleep(100)
-            if xbmc.abortRequested:
+            if xbmc.Monitor().abortRequested():
                 if progress:
                     progress.close()
                 return
@@ -219,7 +219,7 @@ def main():
             log("not watching <%s>. does not exist" % path)
             continue
         finally:
-            if xbmc.abortRequested:
+            if xbmc.Monitor().abortRequested():
                 break
 
         eh = EventHandler(libtype, path, xbmcif)
@@ -230,7 +230,7 @@ def main():
             traceback.print_exc()
             log("failed to watch <%s>" % path)
         finally:
-            if xbmc.abortRequested:
+            if xbmc.Monitor().abortRequested():
                 break
 
     xbmcif.start()
@@ -253,7 +253,7 @@ def main():
         monitor = xbmc.Monitor()
         monitor.waitForAbort()
     else:
-        while not xbmc.abortRequested:
+        while not xbmc.Monitor().abortRequested():
             xbmc.sleep(100)
 
     log("stopping..")
