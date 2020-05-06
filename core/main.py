@@ -33,6 +33,7 @@ from watchdog.events import FileSystemEventHandler
 from watchdog.utils.compat import Event
 from .emitters import MultiEmitterObserver
 
+monitor = xbmc.Monitor()
 
 class XBMCIF(threading.Thread):
     """Wrapper around the builtins to make sure no two commands are executed at
@@ -180,7 +181,7 @@ def main():
         start = time.time()
         while time.time() - start < settings.STARTUP_DELAY:
             xbmc.sleep(100)
-            if xbmc.Monitor().abortRequested():
+            if monitor.abortRequested():
                 if progress:
                     progress.close()
                 return
@@ -219,7 +220,7 @@ def main():
             log("not watching <%s>. does not exist" % path)
             continue
         finally:
-            if xbmc.Monitor().abortRequested():
+            if monitor.abortRequested():
                 break
 
         eh = EventHandler(libtype, path, xbmcif)
@@ -230,7 +231,7 @@ def main():
             traceback.print_exc()
             log("failed to watch <%s>" % path)
         finally:
-            if xbmc.Monitor().abortRequested():
+            if monitor.abortRequested():
                 break
 
     xbmcif.start()
@@ -250,10 +251,10 @@ def main():
             dialog = None
 
     if xbmc.__version__ >= '2.19.0':
-        monitor = xbmc.Monitor()
+        monitor = monitor
         monitor.waitForAbort()
     else:
-        while not xbmc.Monitor().abortRequested():
+        while not monitor.abortRequested():
             xbmc.sleep(100)
 
     log("stopping..")

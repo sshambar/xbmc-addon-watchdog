@@ -26,6 +26,7 @@ import json
 from urllib.parse import unquote
 from threading import Condition
 
+monitor = xbmc.Monitor()
 
 def log(msg, level=xbmc.LOGDEBUG):
     from . import settings
@@ -109,5 +110,5 @@ class XBMCInterrupt(Exception):
 
 
 def raise_if_aborted():
-    if xbmc.Monitor().abortRequested():
+    if monitor.abortRequested():
         raise XBMCInterrupt
