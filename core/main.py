@@ -81,7 +81,7 @@ class XBMCIF(threading.Thread):
             # this commands gets flushed from the queue.
             cmd = self._cmd_queue.get_nowait()
             log("[xbmcif] executing builtin: '%s'" % cmd)
-            xbmc.executebuiltin(cmd.encode('utf-8'))
+            xbmc.executebuiltin(cmd)
 
             # wait for scan to start. we need a timeout or else we a screwed
             # if we missed it.
